@@ -1,0 +1,34 @@
+<div class="register-container">
+  <form [formGroup]="registerForm" (ngSubmit)="onRegister()">
+    <h2>Create Your Account</h2>
+
+    <input type="text" formControlName="firstName" placeholder="First Name">
+    <small *ngIf="submitted && f['firstName'].errors" class="error">First Name is required</small>
+
+    <input type="text" formControlName="lastName" placeholder="Last Name">
+    <small *ngIf="submitted && f['lastName'].errors" class="error">Last Name is required</small>
+
+    <input type="email" formControlName="email" placeholder="Email">
+    <small *ngIf="submitted && f['email'].errors?.['required']" class="error">Email is required</small>
+    <small *ngIf="submitted && f['email'].errors?.['email']" class="error">Enter a valid email</small>
+
+    <input type="tel" formControlName="phoneNumber" placeholder="Phone Number">
+    <small *ngIf="submitted && f['phoneNumber'].errors?.['required']" class="error">Phone Number is required</small>
+    <small *ngIf="submitted && f['phoneNumber'].errors?.['pattern']" class="error">Enter a valid 10-digit phone number</small>
+
+    <input type="password" formControlName="password" placeholder="Password">
+    <small *ngIf="submitted && f['password'].errors?.['required']" class="error">Password is required</small>
+    <small *ngIf="submitted && f['password'].errors?.['minlength']" class="error">Password must be at least 6 characters long</small>
+
+    <input type="password" formControlName="confirmPassword" placeholder="Confirm Password">
+    <small *ngIf="submitted && f['confirmPassword'].errors?.['required']" class="error">Confirm Password is required</small>
+    <small *ngIf="submitted && registerForm.errors?.['mustMatch']" class="error">Passwords do not match</small>
+
+    <textarea formControlName="address" placeholder="Address"></textarea>
+   <!-- <small *ngIf="submitted && f['address'].errors" class="error">Address is required</small> -->
+
+    <button type="submit" class="register-btn" [disabled]="isLoading">
+      {{ isLoading ? 'Registering...' : 'Register' }}
+    </button>
+  </form>
+</div>

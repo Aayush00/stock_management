@@ -1,0 +1,45 @@
+<!-- Navbar (Always Visible) -->
+<nav class="navbar">
+  <div class="logo">
+    <h2>MediLab</h2>
+  </div>
+  <div class="auth-buttons">
+    <ul class="nav-links">
+      <li (click)="onTabClick('Home')">Home</li>
+      <li (click)="onTabClick('About')">About</li>
+      <li (click)="onTabClick('Contact')">Contact</li>
+      <li (click)="onTabClick('Services')">Services</li>
+      <li (click)="openModal()">Log In</li>
+    </ul>
+  </div>
+</nav>
+
+<!-- Modern Modal (Appears Only When Clicking "Log In") -->
+<div class="modal" *ngIf="isModalOpen">
+  <div class="modal-content">
+    <span class="close" (click)="closeModal()">&times;</span>
+
+    <div class="modal-body">
+      <div class="login-section">
+        <h3>Welcome Back!</h3>
+        <p>Login to continue</p>
+        <input type="text" placeholder="Username">
+        <input type="password" placeholder="Password">
+        <button class="next-btn" (click)="onLogin()">Login</button>
+      </div>
+
+      <div class="divider">
+        <span>OR</span>
+      </div>
+
+      <div class="register-section">
+        <h3>New Here?</h3>
+        <p>Join us today!</p>
+        <button class="register-btn" (click)="openRegisterPage()">Register</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Register Modal Component -->
+<app-register-modal *ngIf="isRegisterModalOpen" (closeRegister)="closeRegisterModal()"></app-register-modal>
