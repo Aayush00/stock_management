@@ -8,7 +8,7 @@ import { NavbarComponent } from './component/navbar/navbar.component';
   standalone: true,
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
-  imports: [CommonModule, RouterModule,NavbarComponent]
+  imports: [CommonModule, RouterModule]
 })
 export class AppComponent {
   showLoginModal = false;

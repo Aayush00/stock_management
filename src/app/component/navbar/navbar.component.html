@@ -5,20 +5,61 @@
   </div>
   <div class="auth-buttons">
     <ul class="nav-links">
-      <li (click)="onTabClick('Home')">Home</li>
-      <li (click)="onTabClick('About')">About</li>
-      <li (click)="onTabClick('Contact')">Contact</li>
-      <li (click)="onTabClick('Services')">Services</li>
-      <li (click)="openModal()">Log In</li>
+      
+      <!-- Vendor Dropdown -->
+      <li (mouseenter)="showDropdown('vendor')" (mouseleave)="scheduleHideDropdown('vendor')">
+        Vendor
+        <div class="dropdown-details" *ngIf="activeDropdown === 'vendor'" 
+             (mouseenter)="keepDropdown('vendor')" (mouseleave)="scheduleHideDropdown('vendor')">
+          <h3>Vendor Details</h3>
+          <p>Explore vendor options and opportunities.</p>
+          <button (click)="navigateToPage('vendor')">Go to Vendor Page</button>
+        </div>
+      </li>
+
+      <!-- Customer Dropdown -->
+      <li (mouseenter)="showDropdown('customer')" (mouseleave)="scheduleHideDropdown('customer')">
+        Customer
+        <div class="dropdown-details" *ngIf="activeDropdown === 'customer'" 
+             (mouseenter)="keepDropdown('customer')" (mouseleave)="scheduleHideDropdown('customer')">
+          <h3>Customer Details</h3>
+          <p>Discover our customer services and support.</p>
+          <button (click)="navigateToPage('customer')">Go to Customer Page</button>
+        </div>
+      </li>
+
+      <!-- Products Dropdown -->
+      <li (mouseenter)="showDropdown('products')" (mouseleave)="scheduleHideDropdown('products')">
+        Products
+        <div class="dropdown-details" *ngIf="activeDropdown === 'products'" 
+             (mouseenter)="keepDropdown('products')" (mouseleave)="scheduleHideDropdown('products')">
+          <h3>Product Details</h3>
+          <p>Browse our available products.</p>
+          <button (click)="navigateToPage('products')">Go to Products Page</button>
+        </div>
+      </li>
+
+      <!-- Employees Dropdown -->
+      <li (mouseenter)="showDropdown('employees')" (mouseleave)="scheduleHideDropdown('employees')">
+        Employees
+        <div class="dropdown-details" *ngIf="activeDropdown === 'employees'" 
+             (mouseenter)="keepDropdown('employees')" (mouseleave)="scheduleHideDropdown('employees')">
+          <h3>Employee Details</h3>
+          <p>Meet our dedicated employees.</p>
+          <button (click)="navigateToPage('employees')">Go to Employees Page</button>
+        </div>
+      </li>
+
+      <!-- Log In -->
+      <li (mouseenter)="hideAllDropdowns()" (click)="openModal()">Log In</li>
     </ul>
   </div>
 </nav>
 
-<!-- Modern Modal (Appears Only When Clicking "Log In") -->
+<!-- Modal -->
 <div class="modal" *ngIf="isModalOpen">
   <div class="modal-content">
     <span class="close" (click)="closeModal()">&times;</span>
-
     <div class="modal-body">
       <div class="login-section">
         <h3>Welcome Back!</h3>
@@ -27,11 +68,9 @@
         <input type="password" placeholder="Password">
         <button class="next-btn" (click)="onLogin()">Login</button>
       </div>
-
       <div class="divider">
         <span>OR</span>
       </div>
-
       <div class="register-section">
         <h3>New Here?</h3>
         <p>Join us today!</p>

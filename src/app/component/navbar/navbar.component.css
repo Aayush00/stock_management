@@ -4,17 +4,84 @@
   justify-content: space-between;
   align-items: center;
   background: linear-gradient(45deg, #007bff, #00d4ff);
-  padding: 15px;
+  padding: 15px 30px;
   color: white;
   font-family: 'Poppins', sans-serif;
+  position: relative;
 }
 
+/* Navigation Links */
 .nav-links {
   display: flex;
   list-style: none;
-  gap: 15px;
+  gap: 20px;
+  position: relative;
 }
 
+.nav-links li {
+  position: relative;
+  padding: 10px 15px;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+  font-weight: bold;
+}
+
+/* Hover Effect on Navbar Items */
+.nav-links li:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 5px;
+}
+
+/* Dropdown Styling (Hidden by Default) */
+.dropdown-details {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: white;
+  border-radius: 10px;
+  padding: 20px;
+  width: 250px;
+  z-index: 1000;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  transition: all 0.2s ease-in-out;
+  opacity: 0;
+  visibility: hidden;
+}
+
+/* Show Dropdown when Hovering */
+.nav-links li:hover .dropdown-details {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Dropdown Content */
+.dropdown-details h3 {
+  color: #007bff;
+  margin-bottom: 10px;
+}
+
+.dropdown-details p {
+  color: #333;
+  font-size: 14px;
+}
+
+.dropdown-details button {
+  background: linear-gradient(45deg, #007bff, #00d4ff);
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 100%;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.dropdown-details button:hover {
+  background: linear-gradient(45deg, #0056b3, #00a3cc);
+}
+
+/* Buttons */
 .btn {
   padding: 10px 15px;
   background: white;
@@ -67,6 +134,12 @@
 
 .close:hover {
   color: #000;
+}
+
+.modal-body h3, p {
+  font-weight: bold;
+  color: black;
+  margin-bottom: 20px;
 }
 
 /* Input Fields */
@@ -124,6 +197,25 @@
 }
 
 /* Responsive Design */
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    padding: 10px;
+  }
+
+  .nav-links {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .dropdown-details {
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+  }
+}
+
 @media (max-width: 500px) {
   .modal-content {
     width: 90%;
