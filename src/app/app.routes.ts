@@ -14,7 +14,7 @@ export const routes: Routes = [
   },
   // Add your routes here
   { 
-    path: '', 
+    path: 'home', 
     component: NavbarComponent 
   },
   { 

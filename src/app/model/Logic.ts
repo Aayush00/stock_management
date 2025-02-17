@@ -51,3 +51,36 @@ export class EmployeeList{
         this.address = '';
     }
 }
+
+export class ProductList{
+    productId: number;
+    productName: string;
+    price : number;
+    quantity: number;
+    description: string;
+    
+
+    constructor(){
+        this.productId = 0;
+        this.productName = '';
+        this.price = 0;
+        this.quantity = 0;
+        this.description = '';
+    }
+}
+
+export class FilterProduct {
+    searchQuery: string;
+    minPrice: number;
+    maxPrice: number;
+    minQuantity: number;
+    maxQuantity: number;
+
+    constructor() {
+        this.searchQuery = '';
+        this.minPrice = 0;
+        this.maxPrice = 0;
+        this.minQuantity = 0;
+        this.maxQuantity = 0;
+    }
+}

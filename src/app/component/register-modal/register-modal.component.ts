@@ -46,8 +46,9 @@ export class RegisterModalComponent {
       email: this.registerForm.value.email,
       phoneNumber: this.registerForm.value.phoneNumber,
       password: this.registerForm.value.password,
-      address: this.registerForm.value.address,
-      custId: 0
+      // address: this.registerForm.value.address,
+      custId: 0,
+      address: ''
     };
 
     // Call API to register user

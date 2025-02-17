@@ -24,7 +24,7 @@
     <small *ngIf="submitted && f['confirmPassword'].errors?.['required']" class="error">Confirm Password is required</small>
     <small *ngIf="submitted && registerForm.errors?.['mustMatch']" class="error">Passwords do not match</small>
 
-    <textarea formControlName="address" placeholder="Address"></textarea>
+   <!-- <textarea formControlName="address" placeholder="Address"></textarea> -->
    <!-- <small *ngIf="submitted && f['address'].errors" class="error">Address is required</small> -->
 
     <button type="submit" class="register-btn" [disabled]="isLoading">

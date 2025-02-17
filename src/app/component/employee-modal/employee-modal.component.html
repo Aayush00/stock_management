@@ -1,1 +1,34 @@
-<p>employee-modal works!</p>
+<div class="modal-overlay">
+    <div class="employee-modal">
+        <h2>Employee List</h2>
+        <div class="button-group">
+            <button class="load-btn" (click)="fetchEmployees()">Load Employees</button>
+            <button class="home-btn" (click)="navigateToHome()">Go to Home Page</button>
+        </div>
+
+        <div class="table-container">
+            <table *ngIf="employees && employees.length" class="employee-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Address</th>
+                        <th>Email</th>
+                        <th>Phone Number</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let employee of employees">
+                        <td>{{ employee.employeeId }}</td>
+                        <td>{{ employee.employeeName }}</td>
+                        <td>{{ employee.address }}</td>
+                        <td>{{ employee.email }}</td>
+                        <td>{{ employee.empPhoneNumber }}</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p *ngIf="!employees.length" class="no-data">No employees found. Click "Load Employees" to fetch data.</p>
+        </div>
+    </div>
+</div>

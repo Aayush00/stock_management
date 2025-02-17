@@ -1,1 +1,44 @@
-<p>product-modal works!</p>
+<div class="modal-overlay" *ngIf="isModalOpen">
+    <div class="product-modal">
+      <h2>Product List</h2>
+      
+      <!-- Search Bar -->
+      <div class="search-container">
+        <input type="text" [(ngModel)]="searchQuery" (input)="searchProducts()" placeholder="Search products..." />
+        <button class="clear-btn" *ngIf="searchQuery" (click)="clearSearch()">Clear</button>
+      </div>
+  
+      <div class="button-group">
+        <button class="home-btn" (click)="navigateToHome()">Go to Home Page</button>
+      </div>
+  
+      <div class="table-container">
+        <table *ngIf="filteredProducts.length > 0; else noDataTemplate" class="product-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Price</th>
+              <th>Quantity</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let product of filteredProducts">
+              <td>{{ product.productId }}</td>
+              <td>{{ product.productName }}</td>
+              <td>{{ product.price }}</td>
+              <td>{{ product.quantity }}</td>
+              <td>{{ product.description }}</td>
+            </tr>
+          </tbody>
+        </table>
+  
+        <!-- No Products Found -->
+        <ng-template #noDataTemplate>
+          <p class="no-data">No products found.</p>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+  
