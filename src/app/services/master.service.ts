@@ -7,8 +7,8 @@ import { APIResponseBody, Customer,EmployeeList } from '../model/Logic';
   providedIn: 'root'
 })
 export class MasterService {
-  private apiUrl: string = 'http://192.168.29.26:8081/SpareParts';
-  private apiUrlTest: string = 'http://localhost:8081/SpareParts';
+  //private apiUrl: string = 'http://192.168.29.26:8081/SpareParts';
+  private apiUrl: string = 'http://localhost:8081/SpareParts';
 
   constructor(private http: HttpClient) {}
 
@@ -18,7 +18,10 @@ export class MasterService {
     return this.http.post<APIResponseBody>(url, userData);
   }
 
+  // ✅ API Call for Fetching Employee Details
   getEmployeeDetails(): Observable<EmployeeList[]> {
-    return this.http.get<EmployeeList[]>(`${this.apiUrlTest}/getEmployeeDetails`);
+    return this.http.get<EmployeeList[]>(`${this.apiUrl}/getEmployeeDetails`);
   }
 }
+
+//http://localhost:8081/SpareParts/getEmployeeDetails
