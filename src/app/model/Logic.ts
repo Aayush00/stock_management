@@ -22,7 +22,7 @@ export class Customer{
     email: string;
     phoneNumber: string;
     password: string;
-    address: string;
+    //address: string;
 
     constructor(){
         this.custId = 0;
@@ -31,7 +31,7 @@ export class Customer{
         this.email = '';
         this.phoneNumber = '';
         this.password = '';
-        this.address = '';
+        //this.address = '';
     }
 }
 

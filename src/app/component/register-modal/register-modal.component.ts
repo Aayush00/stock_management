@@ -1,65 +1,75 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MasterService } from '../../services/master.service'; // Import service
 import { Customer } from '../../model/Logic';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register-modal',
   templateUrl: './register-modal.component.html',
+  standalone  : true,
   imports:[CommonModule,ReactiveFormsModule],
   styleUrls: ['./register-modal.component.css']
 })
 export class RegisterModalComponent {
-  registerForm: any;
+  registerForm!: FormGroup;
   submitted = false;
-  isLoading = false; // For showing a loading spinner
+  isLoading = false;
+  masterService = inject(MasterService); // Cleaner DI
+  router = inject(Router);
 
-  constructor(private fb: FormBuilder, private masterService: MasterService) {
+  constructor(private fb: FormBuilder) {}
+
+
+  ngOnInit(): void {
     this.registerForm = this.fb.group({
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       phoneNumber: ['', [Validators.required, Validators.pattern('^[0-9]{10}$')]],
       password: ['', [Validators.required, Validators.minLength(6)]],
-      confirmPassword: ['', Validators.required],
-      //address: ['', Validators.required]
-    });
+      confirmPassword: ['', Validators.required]
+    }, { validator: this.passwordMatchValidator });
+  }
+
+  // Custom Validator to check password and confirmPassword match
+  passwordMatchValidator(form: FormGroup) {
+    const password = form.get('password')?.value;
+    const confirmPassword = form.get('confirmPassword')?.value;
+    return password === confirmPassword ? null : { mismatch: true };
   }
 
   // Getter for easier access to form controls in template
-  get f() { return this.registerForm.controls; }
+  get f() { return this.registerForm.controls; } // For easy access in template
 
   onRegister() {
     this.submitted = true;
 
-    if (this.registerForm.invalid) {
-      return; // Stop if form is invalid
-    }
+    if (this.registerForm.invalid) return;
 
-    this.isLoading = true; // Show loading state
+    this.isLoading = true;
 
-    // Prepare form data for API
     const userData: Customer = {
       firstName: this.registerForm.value.firstName,
       lastName: this.registerForm.value.lastName,
       email: this.registerForm.value.email,
       phoneNumber: this.registerForm.value.phoneNumber,
       password: this.registerForm.value.password,
-      // address: this.registerForm.value.address,
       custId: 0,
-      address: ''
+     // address: ''
     };
 
-    // Call API to register user
     this.masterService.registerUser(userData).subscribe({
-      next: (response: any) => {
-        console.log('User registered successfully', response);
+      next: (response) => {
+        console.log('User registered successfully:', response);
         alert('Registration Successful!');
-        this.isLoading = false;
         this.registerForm.reset();
+        this.submitted = false;
+        this.isLoading = false;
+        this.router.navigate(['/home']); // Navigate to login page after registration
       },
-      error: (error: any) => {
+      error: (error) => {
         console.error('Error registering user:', error);
         alert('Registration failed. Please try again.');
         this.isLoading = false;
